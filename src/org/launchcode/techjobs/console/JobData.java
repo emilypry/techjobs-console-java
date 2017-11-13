@@ -7,9 +7,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -71,18 +69,47 @@ public class JobData {
         loadData();
 
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        String valueUp = value.toUpperCase();
 
         for (HashMap<String, String> row : allJobs) {
-
             String aValue = row.get(column);
+            String aValueUp = aValue.toUpperCase();
 
-            if (aValue.contains(value)) {
+            if (aValueUp.contains(valueUp)) {
                 jobs.add(row);
             }
         }
 
         return jobs;
     }
+
+
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        String valueUp = value.toUpperCase();
+
+        for (HashMap map : findAll()) {
+            //FIND A WAY to make each value in the map UPPERCASE, to compare to valueUp
+
+            HashMap<String, String> ups = new HashMap<String, String>();
+            ups.putAll(map);
+
+            for (Object key : map.keySet()) {
+                String up = (String) map.get(key);
+                ups.put((String) key, up.toUpperCase());
+            }
+
+
+            if (ups.containsValue(valueUp) == true) {
+                jobs.add(map);
+            }
+        }
+
+        return jobs;
+
+    }
+
 
     /**
      * Read in data from a CSV file and store it in a list
