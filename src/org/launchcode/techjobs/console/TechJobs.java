@@ -59,22 +59,21 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    if(JobData.findByValue(searchTerm).size()>0){
-                        System.out.println(JobData.findByValue(searchTerm));
-                    } else {
-                        System.out.println("No results.");
-                    }
 
-                    ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
-                    jobs = JobData.findByValue(searchTerm);
+                    if(JobData.findByValue(searchTerm).size()>0) {
+                        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+                        jobs = JobData.findByValue(searchTerm);
 
-                    for(HashMap map: jobs){
-                        System.out.println("************");
-                        System.out.println("");
-                        for(Object key: map.keySet()){
-                            System.out.println(key + ": " + map.get(key));
+                        for (HashMap map : jobs) {
+                            System.out.println("************");
+                            System.out.println("");
+                            for (Object key : map.keySet()) {
+                                System.out.println(key + ": " + map.get(key));
+                            }
+                            System.out.println("");
                         }
-                        System.out.println("");
+                    }else {
+                        System.out.println("No results.");
                     }
 
                 } else {
@@ -117,6 +116,7 @@ public class TechJobs {
             } else {
                 validChoice = true;
             }
+
 
         } while(!validChoice);
 

@@ -92,18 +92,34 @@ public class JobData {
         for (HashMap map : findAll()) {
             //FIND A WAY to make each value in the map UPPERCASE, to compare to valueUp
 
+            /*
             HashMap<String, String> ups = new HashMap<String, String>();
             ups.putAll(map);
+
 
             for (Object key : map.keySet()) {
                 String up = (String) map.get(key);
                 ups.put((String) key, up.toUpperCase());
             }
+            System.out.println(ups);
+            */
 
-
-            if (ups.containsValue(valueUp) == true) {
-                jobs.add(map);
+            for (Object val: map.values()){
+                String up = (String) val;
+                up = up.toUpperCase();
+                if(up.contains(valueUp) || valueUp.contains(up)){
+                    jobs.add(map);
+                    continue;
+                }
             }
+            /*
+
+            if (ups.containsValue(valueUp) == true ) {
+                jobs.add(map);
+            } else{
+                System.out.println("NOPE");
+            }
+            */
         }
 
         return jobs;
